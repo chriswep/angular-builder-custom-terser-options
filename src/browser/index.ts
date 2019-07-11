@@ -16,9 +16,10 @@ export default class CustomizeTerserBrowserBuilder extends BrowserBuilder {
       Array.isArray(webpackConfig.optimization.minimizer)
     ) {
       const terserPlugin = (webpackConfig.optimization.minimizer as any[]).find(
-        (minimizer) => minimizer.options && minimizer.terserOptions,
+        (minimizer) => minimizer.options && minimizer.options.terserOptions,
       )
       if (terserPlugin) {
+        console.log('using custom terser options')
         const terserOptionsOriginal = terserPlugin.options.terserOptions
         terserPlugin.options.terserOptions = {
           ...terserOptionsOriginal,
